@@ -15,7 +15,7 @@ if (
 
 function createMainWindow() {
   mainWindow = new BrowserWindow({
-    width: 1100,
+    width: isDev ? 1500 : 1100,
     height: 800,
     show: false,
     backgroundColor: "white",
