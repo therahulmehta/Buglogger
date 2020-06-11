@@ -6,25 +6,25 @@ const App = () => {
   // temp logs
   const [logs, setLogs] = useState([
     {
-      id: 1,
+      _id: 1,
       text: "This is log",
       priority: "low",
       user: "rahul",
-      create: new Date().toString(),
+      created: new Date().toString(),
     },
     {
-      id: 2,
+      _id: 2,
       text: "This is log",
       priority: "moderate",
       user: "rahul",
-      create: new Date().toString(),
+      created: new Date().toString(),
     },
     {
-      id: 3,
+      _id: 3,
       text: "This is log",
       priority: "high",
       user: "rahul",
-      create: new Date().toString(),
+      created: new Date().toString(),
     },
   ]);
 
@@ -42,7 +42,7 @@ const App = () => {
         </thead>
         <tbody>
           {logs.map((log) => (
-            <LogItem />
+            <LogItem key={log._id} log={log} />
           ))}
         </tbody>
       </Table>
