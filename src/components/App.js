@@ -4,6 +4,7 @@ import Table from "react-bootstrap/Table";
 import Alert from "react-bootstrap/Alert";
 import LogItem from "./LogItem";
 import AddLogItem from "./AddLogItem";
+import { ipcRenderer } from "electron";
 
 const App = () => {
   // temp logs
@@ -52,6 +53,10 @@ const App = () => {
       });
     }, seconds);
   }
+
+  useEffect(() => {
+    ipcRenderer.send("logs:load");
+  }, []);
 
   function addItem(item) {
     if (item.text === "" || item.user === "" || item.priority === "") {

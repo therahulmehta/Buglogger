@@ -1,6 +1,7 @@
 const path = require("path");
 const url = require("url");
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
+const Log = require("./models/Log");
 const connectDB = require("./config/db");
 const { connect } = require("http2");
 
@@ -70,6 +71,19 @@ function createMainWindow() {
 }
 
 app.on("ready", createMainWindow);
+ipcMain.on("logs:load", sendLogs);
+//async because mongoose returns promises
+async function sendLogs() {
+  try {
+    const logs = await Log.find().sort({
+      // ascending values (!)
+      created: 1,
+    });
+    console.log(logs);
+  } catch (err) {
+    console.log(err);
+  }
+}
 
 app.on("window-all-closed", () => {
   if (process.platform !== "darwin") {
